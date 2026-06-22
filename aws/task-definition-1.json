@@ -1,0 +1,30 @@
+{
+  "family": "Jenktask_prod",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "Jenktask1",
+      "image": "nginx:1.31.1-alpine",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "1024",
+  "memory": "3072"
+}

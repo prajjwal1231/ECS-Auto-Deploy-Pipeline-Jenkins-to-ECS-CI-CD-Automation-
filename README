@@ -1,0 +1,51 @@
+# ECS Auto Deploy Pipeline
+
+## Overview
+
+This project demonstrates a complete CI/CD deployment automation workflow using Jenkins running on a Linux virtual machine hosted in Hyper-V. The pipeline automatically installs required dependencies such as Docker and AWS CLI, builds and pushes container images, registers Amazon ECS task definitions, creates or updates ECS services, and performs cleanup activities after deployment.
+
+## Architecture
+
+* Hyper-V Virtual Machine
+* Linux Operating System
+* Jenkins Automation Server
+* Docker Containerization
+* AWS CLI Integration
+* Amazon ECS Cluster and Services
+
+## Workflow
+
+1. Jenkins pipeline is triggered.
+2. AWS CLI and Docker are installed dynamically if required.
+3. Docker image is built from application source code.
+4. Image is pushed to AWS container registry.
+5. ECS task definition is validated and registered.
+6. ECS service is created or updated within an existing ECS cluster.
+7. Deployment status is verified.
+8. Temporary Docker resources are removed after successful deployment.
+
+## Features
+
+* Automated Docker installation and cleanup
+* Automated AWS CLI configuration
+* ECS Task Definition registration
+* ECS Service creation and updates
+* Jenkins-based CI/CD automation
+* Repeatable and scalable deployment process
+* Infrastructure provisioning integration
+
+## Technologies Used
+
+* Linux
+* Hyper-V
+* Jenkins
+* Docker
+* AWS CLI
+* Amazon ECS
+* Shell Scripting
+* Git and GitHub
+
+## Outcome
+
+The project reduces manual deployment effort by providing an automated pipeline that builds, packages, and deploys containerized applications to Amazon ECS with minimal user intervention.
+

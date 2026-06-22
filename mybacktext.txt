@@ -1,0 +1,36 @@
+stage('Build') {
+            steps {
+                sh '''
+                 ls -la
+                 node --version
+                 echo 'Building your application...'
+                 npm ci
+                #  npx run build
+                 ls -la
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running automated tests...'
+            }
+        }
+        stage('Deploy') {
+            agent {
+                docker {
+                    image 'node:lts'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo 'Deploying to the server...'
+                sh '''
+                # npm config set cache /tmp/.npm --global
+                # npm install -g netlify-cli
+                # netlify --version
+                 export HOME=/tmp
+                 export NPM_CONFIG_CACHE=/tmp/.npm
+                 npx netlify-cli --version
+                '''
+            }
+        }
