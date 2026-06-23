@@ -25,8 +25,31 @@ stage('Build') {
     }
 }
 */
+        stage('AWS S3 Buck Execution !!') {
+            agent {
+                docker {
+                    image 'amazon/aws-cli'
+                    reuseNode true
+                    args "-u root --entrypoint=''"
+                }
+            }
+            environment {
+                AWS_S3_BUCK = 'learn-mybuck-20260611'
+            }
+            steps {
+                 withCredentials([usernamePassword(credentialsId: 'JENKINS_s3',
+                        usernameVariable: 'AWS_ACCESS_KEY_ID',
+                        passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh '''
+                             aws --version
+                             aws s3 ls
+                             aws s3 sync build s3://$AWS_S3_BUCK
+                            '''
+                        }
+            }
+        }
 
-        stage('AWS') {
+        stage('AWS ECS EXECUTION') {
             agent {
                 docker {
                     image 'amazon/aws-cli'
@@ -50,9 +73,6 @@ stage('Build') {
     --service Jenktask_prod-service-3a198knc \
     --task-definition Jenktask_prod:$REV_VALUE
                  aws ecs wait services-stable --cluster educated-zebra-tmxmq8 --services Jenktask_prod-service-3a198knc
-                # aws --version
-                # aws s3 ls
-                # aws s3 sync build s3://$AWS_S3_BUCK
                 '''
 }
             }
